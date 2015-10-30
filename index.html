@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <title>HTTP Cross-Origin Resource Sharing</title>
+	   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#send-btn').click(function(){
+                // 按鈕按下時發送一個 POST Request 到 http://hack.com/hack.php
+			var baseurl='http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-92799803-3FCA-4361-BD85-44ECAE90D988';
+
+			var target=baseurl+'&callback=JSON_CALLBACK';
+			var	data=$.getJSON(target);	
+
+    //成功得到資料
+    		data.success(function( msg ) {
+        			console.log(msg);
+    		});
+
+    //取得資料失敗
+    		data.error(function( msg ) {
+        		$("#result").html("fail getting data");
+    			});
+
+                /*$.ajax({
+                    url: 'http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-92799803-3FCA-4361-BD85-44ECAE90D988',
+                    type: 'GET',
+                    //contentType: 'application/json',
+                    data: '{"data":"' + $('#text-input').val() + '"}'
+                }).done(function() {
+                    console.log('Done!');
+                });*/
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="text" name="data" value="Secret!" id="text-input" />
+	<button id="send-btn">Send to Hack Site</button>
+    <div>
+
+    </div>
+</body>
+</html>
