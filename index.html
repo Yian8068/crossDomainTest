@@ -12,17 +12,10 @@
 			var baseurl='http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-92799803-3FCA-4361-BD85-44ECAE90D988';
 
 			var target=baseurl+'&callback=JSON_CALLBACK';
-			var	data=$.getJSON(target);	
-
-    //成功得到資料
-    		data.success(function( msg ) {
-        			console.log(msg);
-    		});
-
-    //取得資料失敗
-    		data.error(function( msg ) {
-        		$("#result").html("fail getting data");
-    			});
+			var	data=$http.jsonp(target)
+				.sucess(function(data){console.log(data);})
+				.error(function(err){console.log(err);}
+				);
 
                 /*$.ajax({
                     url: 'http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-92799803-3FCA-4361-BD85-44ECAE90D988',
